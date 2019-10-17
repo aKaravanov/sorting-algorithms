@@ -39,3 +39,60 @@ a:link {
 .algorithmName {
   color: purple;
 }
+
+#visualization {
+  padding: 50px 0 50px 50px;
+  flex: 2;
+  margin: 0 auto;
+  max-width: 700px;
+}
+
+button {
+  width: 100%
+  padding: 20px;
+  align-items: center;
+  margin: 10px;
+}
+
+label {
+  display: inline-block;
+  width: 200px;
+}
+
+@media only screen and (max-width: 1000px) {
+  #visualization, #visualization-options {
+    padding: 0;
+    flex: 0 0 100%;
+  }
+
+  .slider {
+    width: 100%;
+  }
+
+  input {
+    max-width: 100%;
+  }
+}
+
+#visualization-options{
+  padding: 0;
+  flex: 1;
+  margin: auto;
+}
+
+#visualization-options ul li {
+  display: table;
+  padding: 0;
+  margin: 0 auto;
+}
+
+input {
+  width: 100%;
+  max-width: 400px;
+}
+
+.side-to-side {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}

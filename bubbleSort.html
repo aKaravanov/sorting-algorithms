@@ -76,25 +76,35 @@
         </p>
       </section>
 
-      <section id="visualization">
+      <section>
         <h2>Visualization</h2>
 
-        <ul style="list-style-type:none" id="specifications">
-          <li>
-            <label>Problem Size</label>
-            <input type="range" min="1" max="100" value="100" class="slider"
-            id="problemSizeSlider">
-          </li>
+        <section class="side-to-side">
+          <div id="visualization-options">
+            <ul style="list-style-type:none">
+              <li class="slider">
+                <label>Problem Size</label>
+                <input type="range" min="1" max="100" value="100" class="slider"
+                id="problemSizeSlider">
+              </li>
 
-          <li>
-            <label>Speed</label>
-            <input type="range" min="1" max="100" value="1" class="slider"
-            id="speedSlider">
-          </li>
-          <li>
-            <button id="sortButton">Sort</button>
-          </li>
-        </ul>
+              <li class="slider">
+                <label>Speed</label>
+                <input type="range" min="1" max="100" value="1" class="slider"
+                id="speedSlider">
+              </li>
+              <li>
+                <button id="sortButton">Sort</button>
+                <button id="pauseButton">Pause</button>
+                <button id="stepButton">Step</button>
+                <button id="resetButton">Reset</button>
+              </li>
+            </ul>
+          </div>
+
+          <div id="visualization"></div>
+        </section>
+
       </section>
 
       <section>
