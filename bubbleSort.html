@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--
+  Andrei Karavanov
+  October 16, 2019
+  Gilmore AB
+
+  This is the example page of how all pages containing algorithms will look
+  like. It has some information about algorithm, but most importainly it also
+  has an interactive vizualization.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css" />
+    <script src="index.js"></script>
+    <script src="sortPage.js"></script>
+    <title>Sorting Algorithms - Visual Tool - Bubble Sort</title>
+  </head>
+  <body>
+    <header>
+      <h1>Sorting Algorithms</h1>
+      <h3 class="algorithmName">Bubble Sort</h3>
+      <nav>
+        <ul style="list-style-type:none" class="container">
+          <li><a href="index.html">Previous Algorithm</a></li>
+          <li><a href="index.html">Main Page</a></li>
+          <li><a href="index.html">Next Algorithm</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section>
+        <h2>Description</h2>
+
+        <p>
+          Bubble sort works by swapping neighbour elements if they are in the
+          wrong order.
+        </p>
+      </section>
+
+      <section>
+        <h2>Algorithm</h2>
+
+        <section>
+          <h4>Steps:</h4>
+          <ol>
+            <li>
+              Starting from the first element, compare it with the next
+              element.
+            </li>
+            <li>
+              If current element is greater, swap them. Otherwise, do
+              nothing.
+            </li>
+            <li>Move to the next element.</li>
+            <li>Repeat <strong>Steps 2</strong> and <strong>3</strong> untill
+              you reach the end.
+            </li>
+            <li>If no swaps were made per pass, you are
+              <strong>done</strong>! Otherwise, start over form
+              <strong>Step 1</strong>.
+            </li>
+          </ol>
+        </section>
+      </section>
+
+      <section>
+        <h2>Complexity</h2>
+
+        <p>
+          Since in the worst case you will have to perform <strong>n</strong>
+            passes, where <strong>n</strong> is the number of elements, the
+            complexity class of this algorithm is
+            <strong>O(n<sup>2</sup>)</strong>.
+        </p>
+      </section>
+
+      <section id="visualization">
+        <h2>Visualization</h2>
+
+        <ul style="list-style-type:none" id="specifications">
+          <li>
+            <label>Problem Size</label>
+            <input type="range" min="1" max="100" value="100" class="slider"
+            id="problemSizeSlider">
+          </li>
+
+          <li>
+            <label>Speed</label>
+            <input type="range" min="1" max="100" value="1" class="slider"
+            id="speedSlider">
+          </li>
+          <li>
+            <button id="sortButton">Sort</button>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>List of Algorithms</h2>
+        <ul class="algorithmsList">
+          <li>
+            <a href="bubbleSort.html">Bubble Sort</a>
+          </li>
+          <li>
+            <a href="bubbleSort.html">Selection Sort</a>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Portions of this page &copy; 2019 Andrei Karavanov, other attributions
+        cited in document or page source
+      </p>
+    </footer>
+  </body>
+</html>

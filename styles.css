@@ -1,0 +1,41 @@
+/*
+  Andrei Karavanov
+  October 16, 2019
+  Gilmore, AB
+
+  This is the main stylesheet of my project. It has iniversal rulset that
+  is applicable to every single page of my project.
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.container li {
+  flex: 1;
+}
+
+body {
+  background-color: #F5F4F0;
+  font-family: 'Roboto Mono', sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+header {
+  text-align: center;
+}
+
+a:link {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.algorithmName {
+  color: purple;
+}
