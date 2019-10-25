@@ -131,3 +131,33 @@ input::-webkit-slider-thumb {
   flex-wrap: wrap;
   align-items: center;
 }
+
+.little-box {
+  color: white;
+  border: solid 1px black;
+  text-align: center;
+  height: 200px;
+  position: relative;
+  width: 20px;
+  margin: 10px 10px;
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+.little-box p {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  /* margin: ; */
+}
+
+#vis {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  border: 2px solid black;
+  height: 450px;
+  width: 800px;
+  margin: auto auto;
+}

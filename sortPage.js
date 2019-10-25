@@ -13,6 +13,7 @@
   let strokeWidth;
   let speed = 1;
   let isSorting = false;
+  let timer = null;
 
   let i;
   let j;
@@ -25,6 +26,8 @@
     resetArray();
     setUpControls();
     drawCurrentState();
+    addBox();
+    // timer = setInterval(updateBox, 200);
   }
 
   function setUpControls() {
@@ -105,12 +108,13 @@
   }
 
   /** Performs sorting when button is pressed */
-  function sort() {
-    document.getElementById("sortButton").style.display = "none";
-    document.getElementById("pauseButton").style.display = "inline";
-    document.getElementById("resetButton").style.display = "inline";
-    eventId = window.requestAnimationFrame(draw);
-    isSorting = true;
+  async function sort() {
+    await sortBooks();
+    // document.getElementById("sortButton").style.display = "none";
+    // document.getElementById("pauseButton").style.display = "inline";
+    // document.getElementById("resetButton").style.display = "inline";
+    // eventId = window.requestAnimationFrame(draw);
+    // isSorting = true;
   }
 
   function resetAllButtons() {
@@ -192,7 +196,6 @@
    * problem
    */
   function resetArray() {
-    console.log(document.getElementById("problemSizeSlider"));
     let size = document.getElementById("problemSizeSlider").value;
     workingArray = [];
     let lengthOfArray = parseInt(size) + 5;
@@ -216,4 +219,149 @@
     workingArray[q + 1] = workingArray[q];
     workingArray[q] = temp;
   }
+
+  function updateBox() {
+    let box = document.querySelectorAll(".little-box")[0];
+    let sides = [];
+
+    let topSide = parseInt(window.getComputedStyle(box).top);
+    let leftSide = parseInt(window.getComputedStyle(box).left);
+
+    if (topSide >= 20) {
+      sides.push("top");
+    }
+
+    if (topSide <= 480) {
+      sides.push("bottom");
+    }
+
+    if (leftSide >= 20) {
+      sides.push("left");
+    }
+
+    if (leftSide <= 480) {
+      sides.push("right");
+    }
+
+    let randomSideIndex = Math.floor(Math.random() * sides.length);
+    let randomSide = sides[randomSideIndex];
+
+    switch (randomSide) {
+      case "top":
+        box.style.top = topSide - 20 + "px";
+        break;
+      case "right":
+        box.style.left = leftSide + 20 + "px";
+        break;
+      case "left":
+        box.style.left = leftSide - 20 + "px";
+        break;
+      case "bottom":
+        box.style.top = topSide + 20 + "px";
+        break;
+    }
+  }
+
+  function addBox() {
+    let size = document.getElementById("problemSizeSlider").value;
+    const COLORS = ["#e6194B", "#3cb44b", "#ffe119", "#4363d8", "#f58231",
+      "#911eb4", "#42d4f4", "#f032e6", "#bfef45", "#fabebe", "#469990",
+      "#e6beff", "#9A6324", "#a9a9a9", "#800000", "#aaffc3", "#808000",
+      "#ffd8b1", "#000075"];
+    const letters = ("abcdefghijklmnopqrstuvwxyz").toUpperCase().split("");
+    shuffle(COLORS);
+    shuffle(letters);
+    // size = COLORS.length;
+    size = 10;
+    let index = 0;
+
+    while (size > 0) {
+      let littleBox = document.createElement("div");
+      let letter = letters[size-1];
+      let color = COLORS[size-1];
+      littleBox.innerHTML = `<p>${letter}</p>`;
+      littleBox.style.background = color;
+      littleBox.classList.add("little-box");
+      littleBox.addEventListener("click", moveBox);
+      document.getElementById("vis").appendChild(littleBox);
+      size-=1;
+      index+=1;
+    }
+  }
+
+  async function sortBooks() {
+    let books = document.getElementById("vis");
+    for (let index = 0; index < books.children.length; index++) {
+      for (let index2 = 0; index2 < books.children.length - 1; index2++) {
+        let book = books.children[index2];
+        let nextBook = book.nextSibling;
+        let b1 = book.children[0].innerText;
+        let b2 = nextBook.children[0].innerText;
+        if (b1 > b2) {
+          await moveBox(book);
+        }
+      }
+    }
+  }
+
+  async function moveBox(box) {
+    let topSide = parseInt(window.getComputedStyle(box).top);
+    let leftSide = parseInt(window.getComputedStyle(box).left);
+
+    return new Promise((resolve, reject) => {
+      new Promise((resolve, reject) => {
+        let timer = setInterval(function(){
+          if (topSide >= -200) {
+            topSide -= 20;
+            box.style.top = topSide + "px";
+          } else {
+            resolve();
+            clearInterval(timer);
+          }
+        }, 25);
+      }).then(() => {
+          swapWithNeighbour(box);
+          new Promise((resolve, reject) => {
+            let timer = setInterval(async function(){
+              if (topSide < 0) {
+                topSide += 20;
+                box.style.top = topSide + "px";
+              } else {
+                resolve();
+                clearInterval(timer);
+              }
+            }, 25);
+          })
+      }).then(resolve());
+    })
+  }
+
+  async function moveBack(box) {
+    let topSide = parseInt(window.getComputedStyle(box).top);
+  }
+
+  function swapWithNeighbour(box) {
+    let next = box.nextSibling;
+
+    if (next) {
+      box.parentNode.insertBefore(next, box);
+    }
+  }
+
+  /**
+ * Shuffles array in place.
+ * @param {Array} a items An array containing the items.
+ */
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
+  }
+
+
 })();
